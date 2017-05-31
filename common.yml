@@ -1,0 +1,51 @@
+
+wp_cli_files:
+  image: johnrom/docker-wordpress-wp-cli-xdebug:latest
+  command: /bin/true
+
+wp_cli_site:
+  restart: always
+  image: johnrom/docker-wordpress-wp-cli-xdebug:latest
+  working_dir: /var/www/html
+  expose:
+    - "80"
+    - "443"
+  environment:
+    - HTTPS_METHOD=noredirect
+    - XDEBUG_CONFIG
+
+wp_cli:
+  image: johnrom/nimble-wp-cli:latest
+  environment:
+    - XDEBUG_CONFIG
+
+wp_cli_local:
+  build: IMAGES/johnrom/nimble-wp-cli
+
+wp_cli_db:
+  restart: always
+  image: mariadb
+  environment:
+    MYSQL_ROOT_PASSWORD: example
+
+wp_cli_pma:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    environment:
+      - HTTPS_METHOD=noredirect
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=example
+      - PHP_UPLOAD_MAX_FILESIZE=256M
+    expose:
+      - "80"
+      - "443"
+
+wp_cli_webgrind:
+    image: clue/webgrind
+    restart: always
+    expose:
+      - "80"
+      - "443"
+    environment:
+      - HTTPS_METHOD=noredirect
