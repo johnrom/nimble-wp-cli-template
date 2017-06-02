@@ -34,6 +34,15 @@ PROJECT:
     - PROJECT_www
   links:
     - PROJECT_db:mysql
+    - PROJECT_test_db:mysql_test
+
+PROJECT_composer:
+  container_name: PROJECT_composer
+  extends:
+    file: COMMON
+    service: wp_cli_composer
+  volumes_from:
+    - PROJECT_www
 
 PROJECT_db:
   container_name: PROJECT_db
@@ -42,6 +51,14 @@ PROJECT_db:
     service: wp_cli_db
   volumes:
     - PROJECT_db_volume:/var/lib/mysql
+
+PROJECT_test_db:
+  container_name: PROJECT_test_db
+  extends:
+    file: COMMON
+    service: wp_cli_test_db
+  volumes:
+    - PROJECT_test_db_volume:/var/lib/mysql
 
 PROJECT_pma:
   container_name: PROJECT_pma

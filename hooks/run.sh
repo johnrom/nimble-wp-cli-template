@@ -1,3 +1,2 @@
-echo "wp --path=/www ${*:4}"
 
-nimble bash "$project" "wp --path=/www ${*:4}"
+nimble bash "$project" "\/app/bin/wp --path=/var/www/html ${*:4}"

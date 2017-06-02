@@ -18,15 +18,34 @@ wp_cli:
   image: johnrom/nimble-wp-cli:latest
   environment:
     - XDEBUG_CONFIG
+    - WP_CLI_TEST_DBHOST=mysql_test
+
+wp_cli_composer:
+  image: composer/composer:latest
+  working_dir: /app
+  environment:
+    - XDEBUG_CONFIG
 
 wp_cli_local:
-  build: IMAGES/johnrom/nimble-wp-cli
+  build: IMAGES/johnrom/nimble-wp-cli-image
+  environment:
+    - XDEBUG_CONFIG
+    - WP_CLI_TEST_DBHOST=mysql_test
 
 wp_cli_db:
   restart: always
   image: mariadb
   environment:
     MYSQL_ROOT_PASSWORD: example
+
+wp_cli_test_db:
+  restart: always
+  image: mariadb
+  environment:
+    MYSQL_ROOT_PASSWORD: example
+    MYSQL_USER: wp_cli_test
+    MYSQL_PASSWORD: password1
+    MYSQL_DATABASE: wp_cli_test
 
 wp_cli_pma:
     image: phpmyadmin/phpmyadmin
