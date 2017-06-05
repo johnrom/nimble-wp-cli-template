@@ -7,10 +7,9 @@ PROJECT_www:
     file: COMMON
     service: wp_cli_files
   volumes:
-    - SITEROOT/www:/www
+    - SITEROOT/www:/var/www/html
     - SITEROOT/cachegrind:/tmp/cachegrind
     - SITEROOT/cli:/app
-    - SITEROOT/logs:/var/log
     - SITEROOT/conf/custom.ini:/usr/local/etc/php/conf.d/custom.ini
 
 PROJECT_site:
@@ -32,9 +31,12 @@ PROJECT:
     service: wp_cli_local
   volumes_from:
     - PROJECT_www
+  volumes:
+    - SITEROOT/logs:/var/log
   links:
     - PROJECT_db:mysql
     - PROJECT_test_db:mysql_test
+
 
 PROJECT_composer:
   container_name: PROJECT_composer
