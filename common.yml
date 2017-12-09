@@ -15,7 +15,7 @@ wp_cli_site:
     - XDEBUG_CONFIG
 
 wp_cli:
-  image: johnrom/nimble-wp-cli:latest
+  image: johnrom/nimble-wp-cli-image:latest
   environment:
     - XDEBUG_CONFIG
     - WP_CLI_TEST_DBHOST=mysql_test

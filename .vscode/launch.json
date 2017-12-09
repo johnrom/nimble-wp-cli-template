@@ -6,8 +6,10 @@
 			"type": "php",
 			"request": "launch",
 			"port": 9000,
-            "localSourceRoot": "${workspaceRoot}/cli",
-            "serverSourceRoot": "/app",
+			"pathMappings": {
+				"/app": "${workspaceRoot}/cli",
+				"/var/www/html": "${workspaceRoot}/www"
+			},
 			"log": true
 		}
 	]

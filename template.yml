@@ -10,7 +10,7 @@ PROJECT_www:
     - SITEROOT/www:/var/www/html
     - SITEROOT/cachegrind:/tmp/cachegrind
     - SITEROOT/cli:/app
-    - SITEROOT/conf/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+    - SITEROOT/_conf/custom.ini:/usr/local/etc/php/conf.d/custom.ini
 
 PROJECT_site:
   container_name: PROJECT_site
@@ -28,7 +28,7 @@ PROJECT:
   container_name: PROJECT
   extends:
     file: COMMON
-    service: wp_cli_local
+    service: wp_cli
   volumes_from:
     - PROJECT_www
   volumes:
